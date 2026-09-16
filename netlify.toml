@@ -1,0 +1,10 @@
+[[redirect]]
+from = "/api/*"
+to = "https://www.clobnet.com.ng/api/:splat"
+status = 200
+force = true
+headers = {x-Forwarded-Host = "eicha-db6454.netlify.app"}
+
+[[headers]]
+for = "/*"
+headers = {Access-Control-Allow-Origin = "*"}

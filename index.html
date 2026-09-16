@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <META name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>AG DATA/AIRTME</title>
+            <link rel="stylesheet" href="style.css">
+            <link rel="manifest" href="manifest.json">
+            <link rel="icon" href="icon.png">
+            <meta name="theme-color" content="#0a7e07">
+    </head>
+    <body>
+        <div class="hearder">
+            <h1>AG <DATA/AIRTIME></h1>
+            <P>Data | Airtime | NIN | BVN | Bills</P>
+        </div>
+
+        <div class="card">
+            <h3>Buy Data</h3>
+            <select id="network">
+                <option value="mtn">MTN</option>
+                <option value="glo">GLO</option>
+                <option value="airtel">AIRTEL</option>
+                <option value="9mobile">9MOBILE</option>
+            </select>
+            <input id="phone" placeholder="phone number"/>
+            <select id="dataPlan"> </select>
+            <button onclick="buyData()">Buy Data Now</button>
+        </div>
+
+
+        <div class="card">
+            <h3>Buy Airtime</h3>
+            <select id="airtimeNetwork">
+                <option value="mtn">MTN</option>
+                <option value="glo">GLO</option>
+                <option value="airtel">AIRTEL</option>
+                <option value="9mobile">9MOBILE</option>
+            </select>
+            <input id="airtimePhone" placeholder="phonen number"/>
+            <input id="airtimeAmount" placeholder="Amount" type="number"/>
+            <button onclick="buyAirtime()">Buy Airtime Now</button>
+        </div>
+
+        <div class="card">
+            <p id="status">Wallet:Ready</p>
+            <button onclick="fundWallet()">fund Wallet</button>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>

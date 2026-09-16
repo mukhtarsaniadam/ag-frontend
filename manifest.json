@@ -1,0 +1,17 @@
+{
+    "name": "AG DATA/AIRTIME",
+    "short_name": "AG DATA/AIRTIME",
+    "description": "Buy Data, Airtime, Pay Bills, NIN,  BVN",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a7e07",
+    "theme_color": "#0a7e07",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "512*512",
+            "type":  "image/png"      
+        }
+
+    ]
+}
