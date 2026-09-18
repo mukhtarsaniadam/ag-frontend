@@ -111,7 +111,7 @@ async function buyData() {
             }
 
             try{
-                var token = localStorage.getItem("token");
+                var token = localStorage.getItem("token") || localStorage.getItem("accessToken") || localStorage.getItem("authToken") || localStorage.getItem("jwt") || sessionStorage.getItem("token") || localStorage.getItem("userToken");
                 if(!token) {
                     alert("Please login first");
                     return;
