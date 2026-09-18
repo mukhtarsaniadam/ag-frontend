@@ -101,28 +101,52 @@ async function buyData() {
   
         }
         async function fundWallet() {
-            var amount = prompt("Enter amount to fund");
-            if(!amount) return;
+            var amountInput = prompt("Enter amount to fund (minimum 100)");
+            if(!amountInput) return;
+
+            var amount = parseInt(amountInput);
+            if(isNaN(amount) || amount < 100) {
+                alert("Minimum amount is 100");
+                return;
+            }
 
             try{
                 var token = localStorage.getItem("token");
+                if(!token) {
+                    alert("Please login first");
+                    return;
+                }
+                showLoader();
                 var res = await fetch("https://ag-backend.vercel.app/api/wallet/fund",{
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": "Bearer " + token
                     },
-                    body: JSON.stringify({ amount: Number(amount)})
+                    body: JSON.stringify({ amount: amount})
                 });
                 var data = await res.json();
-                if(data.authorization_url){
-                    window.location.href = data.authorization_url;
-                } else {
-                    alert(data.message || "Failed to start payment");
-                    console.log(data);
+                hideLoader();
+
+                if(!res.ok) {
+                    throw new Error(data.message || data.error || "funding failed");
+                    
                 }
+
+                if(data.authorization_url || data.data?.authorization_url){
+                    var url = data.authorization_url || data.data.authorization_url;
+                    window.location.href = url;
+                } else if(data.success){
+                    alert("Wallet funded successifully! Amount: " + amount);
+                    location.reload();
+                } else {
+                    throw new Error ("No payment URL received");
+                } 
+            
             } catch(err){
+                hideLoader();
                 alert("Error: " + err.message);
+                console.error(err);
             }
         }
     
