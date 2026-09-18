@@ -112,7 +112,7 @@ async function buyData() {
 
             try{
                 if(typeof showLoader === 'function') showLoader();
-                var token = localStorage.getItem("token") || localStorage.getItem("accessToken") || localStorage.getItem("authToken") || localStorage.getItem("userToken") || localStorage.getItem("jwt") || "" ;
+                var token = localStorage.getItem("token") || localStorage.getItem("accessToken") || "" ;
 
             
                 var res = await fetch("https://ag-backend.vercel.app/api/wallet/fund",{
@@ -123,11 +123,15 @@ async function buyData() {
                     },
                     body: JSON.stringify({ amount: amount})
                 });
-                var data = await res.json();
+                var text = await res.text();
+                console.log("Backend response:",text);
+                var data = {};
+                try { data = JSON.parse(text); } catch(e) { data = { message: text };}
             if(typeof hideLoader === 'function') hideLoader();
 
                 if(!res.ok) {
                     throw new Error(data.message || data.error || "funding failed");
+                    return;
                     
                 }
 
@@ -141,8 +145,8 @@ async function buyData() {
                     throw new Error ("No payment URL received");
                 } 
             
-            } catch(err){
-                hideLoader();
+            } catch(e){
+                if (typeof hideLoader === 'function') hideLoader();
                 alert("Error: " + err.message);
                 console.error(err);
             }
