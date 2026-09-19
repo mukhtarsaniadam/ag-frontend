@@ -115,7 +115,7 @@ async function buyData() {
                 var token = localStorage.getItem("token") || localStorage.getItem("accessToken") || "" ;
 
             
-                var res = await fetch("https://ag-backend.vercel.app/api/wallet/fund",{
+                var res = await fetch("https://ag-backend-ten.vercel/api/wallet/init",{
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
